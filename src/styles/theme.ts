@@ -9,4 +9,13 @@ export const theme = {
     yellow: "#FFB700",
     white: "#fbfbfb",
   },
+  text: {
+    default: "14px",
+    large: "28px",
+  },
+  radius: {
+    default: "4px",
+    large: "8px",
+    full: "9999px",
+  },
 };
