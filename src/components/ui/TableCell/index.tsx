@@ -1,52 +1,48 @@
-import { useCallback, useEffect, useState } from "react";
-import { convertToCurrency } from "../../../utils";
+import { useCallback, useState } from "react";
+import { convertToCurrency } from "../../../utils/functions";
 import { Container } from "./styles";
 
 interface TableCellProps {
-  isEditable?: boolean;
-  value?: number | string;
+  isEditable: boolean;
+  text: string;
+  value: number;
 }
 
-export const TableCell = ({
-  isEditable,
-  value: initialValue = "",
-}: TableCellProps) => {
-  const [value, setValue] = useState(initialValue);
+export const TableCell = ({ isEditable, text, value }: TableCellProps) => {
+  const [cellValue, setCellValue] = useState(value);
+  const [inputValue, setInputValue] = useState(text);
 
-  useEffect(() => {
-    if (!isEditable) return;
-    setValue(convertToCurrency(Number(value)));
+  const changeValue = useCallback((value: string | number) => {
+    setCellValue(Number(value));
+    setInputValue(String(value));
   }, []);
 
   const onBlur = useCallback(() => {
-    if (Number(value)) return setValue(convertToCurrency(Number(value)));
-    setValue("");
-  }, [value]);
+    if (cellValue <= 0) return setInputValue("");
+    setInputValue(convertToCurrency(cellValue));
+  }, [cellValue]);
 
-  const onChange = useCallback((value: number | string) => {
-    const regex = /[^\d.]/g;
-    const onlyNumbers = String(value)?.replaceAll(regex, "");
+  const onChange = useCallback(
+    (value: string) => {
+      const regex = /[^\d.]/g;
+      const onlyNumbers = String(value)?.replaceAll(regex, "");
+      changeValue(onlyNumbers);
+    },
+    [changeValue]
+  );
 
-    setValue(onlyNumbers);
-  }, []);
-
-  const convertValue = useCallback(() => {
-    const [int = "0", cents = "0"] = String(value).split(",", 2);
-    const regex = /[^\d]/g;
-    const onlyNumbers = int.replaceAll(regex, "");
-
-    const parsedValue = Number(`${onlyNumbers}.${cents}`);
-
-    setValue(parsedValue);
-  }, [value]);
+  const onFocus = useCallback(() => {
+    if (cellValue > 0) return setInputValue(String(cellValue));
+    setInputValue("");
+  }, [cellValue]);
 
   const onKeyDown = useCallback(
     (e) => {
       if (e.key === "Enter") e.currentTarget.blur();
-      if (e.key === "ArrowUp") setValue(Number(value) + 1);
-      if (e.key === "ArrowDown") setValue(Number(value) - 1);
+      if (e.key === "ArrowUp") changeValue(cellValue + 1);
+      if (e.key === "ArrowDown") changeValue(cellValue - 1);
     },
-    [value]
+    [changeValue, cellValue]
   );
 
   return (
@@ -56,13 +52,13 @@ export const TableCell = ({
           onKeyDown={onKeyDown}
           type="text"
           placeholder="R$ 0,00"
-          value={value}
+          value={inputValue}
           onBlur={onBlur}
-          onFocus={convertValue}
+          onFocus={onFocus}
           onChange={(e) => onChange(e.target.value)}
         />
       ) : (
-        value
+        text
       )}
     </Container>
   );

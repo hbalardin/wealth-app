@@ -2,15 +2,12 @@ import { useState } from "react";
 import { Container } from "./styles";
 
 interface TableColumnProps {
-  isEditable?: boolean;
-  value?: string;
+  isEditable: boolean;
+  text: string;
 }
 
-export const TableColumn = ({
-  isEditable,
-  value: initialValue,
-}: TableColumnProps) => {
-  const [value, setValue] = useState(initialValue);
+export const TableColumn = ({ isEditable, text }: TableColumnProps) => {
+  const [value, setValue] = useState(text);
   return (
     <Container isEditable={isEditable}>
       {isEditable ? (
