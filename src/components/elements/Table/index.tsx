@@ -1,8 +1,8 @@
 import { useCallback, useMemo } from "react";
 import { Container } from "./styles";
 
-import { TableColumn } from "../../ui/TableColumn";
-import { TableCell } from "../../ui/TableCell";
+import { TableColumn } from "../../elements/TableColumn";
+import { TableCell } from "../../elements/TableCell";
 import { Cell, Column, TableData } from "../../../hooks/useWealthTable";
 
 const Table = ({ columns, rows, updateData }: TableData) => {

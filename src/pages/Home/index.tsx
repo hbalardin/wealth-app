@@ -1,6 +1,6 @@
 import { PageTitle } from "./styles";
 
-import Table from "../../components/ui/Table";
+import Table from "../../components/elements/Table";
 import PageLayout from "../../components/layout/PageLayout";
 
 import { useWealthTable } from "../../hooks/useWealthTable";
