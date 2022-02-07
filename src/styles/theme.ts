@@ -1,5 +1,6 @@
 export const theme = {
   color: {
+    black: "#040404",
     darkGray: "#0B0B0B",
     gray: "#141414",
     green: "#23A992",
@@ -9,13 +10,18 @@ export const theme = {
     yellow: "#FFB700",
     white: "#fbfbfb",
   },
-  text: {
-    default: "14px",
-    large: "28px",
+  gradient: {
+    orangeYellow:
+      "linear-gradient(140deg, rgba(255,183,0,1) 0%, rgba(255,73,0,1) 44%, rgba(255,73,0,1) 100%)",
   },
   radius: {
     default: "4px",
     large: "8px",
     full: "9999px",
+  },
+  text: {
+    default: "14px",
+    medium: "18px",
+    large: "28px",
   },
 };

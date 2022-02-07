@@ -1,6 +1,12 @@
 import styled from "styled-components";
 
-export const PageTitle = styled.h1`
-  margin-bottom: 16px;
-  font-size: ${(props) => props.theme.text.large};
+export const PageHeader = styled.header`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 32px;
+
+  h1 {
+    font-size: ${(props) => props.theme.text.large};
+  }
 `;
