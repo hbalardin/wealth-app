@@ -13,7 +13,9 @@ const Home = () => {
     <PageLayout>
       <PageHeader>
         <h1>Sua Riqueza</h1>
-        <Button>Adicionar coluna</Button>
+        <Button onClick={wealthTableProps.createColumn}>
+          Adicionar coluna
+        </Button>
       </PageHeader>
       <Table {...wealthTableProps} />
     </PageLayout>
