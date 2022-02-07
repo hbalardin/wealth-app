@@ -1,5 +1,17 @@
+import { GlobalStyle } from "./styles/global";
+import { ThemeProvider } from "styled-components";
+
+import Home from "./pages/Home";
+
+import { theme } from "./styles/theme";
+
 const App = () => {
-  return <h1>Primo App</h1>;
+  return (
+    <ThemeProvider theme={theme}>
+      <GlobalStyle />
+      <Home />
+    </ThemeProvider>
+  );
 };
 
 export default App;
