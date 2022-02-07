@@ -1,24 +1,25 @@
-import { useState } from "react";
+import { Column } from "../../../hooks/useWealthTable";
 import { Container } from "./styles";
 
 interface TableColumnProps {
-  isEditable: boolean;
-  text: string;
+  column: Column;
+  onChangeColumn: (newColumn: Column) => void;
 }
 
-export const TableColumn = ({ isEditable, text }: TableColumnProps) => {
-  const [value, setValue] = useState(text);
+export const TableColumn = ({ column, onChangeColumn }: TableColumnProps) => {
+  const { isEditable, text } = column;
+
   return (
     <Container isEditable={isEditable}>
       {isEditable ? (
         <input
           type="text"
           placeholder="Banco Y"
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
+          value={text}
+          onChange={(e) => onChangeColumn({ ...column, text: e.target.value })}
         />
       ) : (
-        value
+        text
       )}
     </Container>
   );

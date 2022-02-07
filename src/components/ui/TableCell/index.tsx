@@ -1,26 +1,34 @@
 import { useCallback, useState } from "react";
+import { Cell } from "../../../hooks/useWealthTable";
 import { convertToCurrency } from "../../../utils/functions";
 import { Container } from "./styles";
 
 interface TableCellProps {
-  isEditable: boolean;
-  text: string;
-  value: number;
+  cell: Cell;
+  onChangeCell: (newCell: Cell) => void;
 }
 
-export const TableCell = ({ isEditable, text, value }: TableCellProps) => {
+export const TableCell = ({ cell, onChangeCell }: TableCellProps) => {
+  const { text, value, isEditable } = cell;
+
   const [cellValue, setCellValue] = useState(value);
-  const [inputValue, setInputValue] = useState(text);
+  const [inputText, setInputText] = useState(text);
 
   const changeValue = useCallback((value: string | number) => {
     setCellValue(Number(value));
-    setInputValue(String(value));
+    setInputText(String(value));
   }, []);
 
   const onBlur = useCallback(() => {
-    if (cellValue <= 0) return setInputValue("");
-    setInputValue(convertToCurrency(cellValue));
-  }, [cellValue]);
+    const newText = cellValue >= 0 ? convertToCurrency(cellValue) : "";
+    setInputText(newText);
+
+    onChangeCell({
+      ...cell,
+      value: cellValue,
+      text: newText,
+    });
+  }, [cell, onChangeCell, cellValue]);
 
   const onChange = useCallback(
     (value: string) => {
@@ -32,8 +40,8 @@ export const TableCell = ({ isEditable, text, value }: TableCellProps) => {
   );
 
   const onFocus = useCallback(() => {
-    if (cellValue > 0) return setInputValue(String(cellValue));
-    setInputValue("");
+    if (cellValue > 0) return setInputText(String(cellValue));
+    setInputText("");
   }, [cellValue]);
 
   const onKeyDown = useCallback(
@@ -52,7 +60,7 @@ export const TableCell = ({ isEditable, text, value }: TableCellProps) => {
           onKeyDown={onKeyDown}
           type="text"
           placeholder="R$ 0,00"
-          value={inputValue}
+          value={inputText}
           onBlur={onBlur}
           onFocus={onFocus}
           onChange={(e) => onChange(e.target.value)}

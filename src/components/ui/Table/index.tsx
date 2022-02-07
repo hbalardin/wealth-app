@@ -1,37 +1,72 @@
+import { useCallback, useMemo } from "react";
 import { Container } from "./styles";
 
 import { TableColumn } from "../../ui/TableColumn";
 import { TableCell } from "../../ui/TableCell";
-import { TableProps, useTable } from "../../../hooks/useTable";
+import { Cell, Column, TableData } from "../../../hooks/useWealthTable";
 
-const Table = (data: TableProps) => {
-  const { columns, rows } = useTable(data);
+const Table = ({ columns, rows, updateData }: TableData) => {
+  const onChangeColumn = useCallback(
+    (newColumn: Column) => {
+      const updatedColumns = columns.map((column) => {
+        if (column.key === newColumn.key) return newColumn;
+        return column;
+      });
+      updateData({ rows, columns: updatedColumns });
+    },
+    [columns, rows, updateData]
+  );
+
+  const onChangeCell = useCallback(
+    (newCell: Cell) => {
+      const updatedRows = rows.map((row) => {
+        if (row.id !== newCell.rowId) return row;
+        return {
+          ...row,
+          cells: row.cells.map((cell) => {
+            if (cell.columnKey !== newCell.columnKey) return cell;
+            return newCell;
+          }),
+        };
+      });
+      updateData({ columns, rows: updatedRows });
+    },
+    [columns, rows, updateData]
+  );
+
+  const theadContent = useMemo(() => {
+    return columns.map((column) => (
+      <TableColumn
+        key={column.key}
+        column={column}
+        onChangeColumn={onChangeColumn}
+      />
+    ));
+  }, [columns, onChangeColumn]);
+
+  const tbodyContent = useMemo(() => {
+    return rows.map((row) => (
+      <tr key={row.id}>
+        {columns.map((column) => {
+          const i = row.cells.findIndex(
+            (cell) => column.key === cell.columnKey
+          );
+          return (
+            <TableCell
+              key={column.key}
+              cell={row.cells[i]}
+              onChangeCell={onChangeCell}
+            ></TableCell>
+          );
+        })}
+      </tr>
+    ));
+  }, [columns, onChangeCell, rows]);
 
   return (
     <Container>
-      <thead>
-        {columns.map((column) => (
-          <TableColumn
-            key={column.key}
-            isEditable={column.isEditable}
-            text={column.text}
-          />
-        ))}
-      </thead>
-      <tbody>
-        {rows.map((row) => (
-          <tr key={row.id}>
-            {row.cells.map((cell) => (
-              <TableCell
-                isEditable={cell.isEditable}
-                key={cell.key}
-                text={cell.text}
-                value={cell.value}
-              ></TableCell>
-            ))}
-          </tr>
-        ))}
-      </tbody>
+      <thead>{theadContent}</thead>
+      <tbody>{tbodyContent}</tbody>
     </Container>
   );
 };
