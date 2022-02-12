@@ -6,6 +6,7 @@ interface ContainerProps {
 
 export const Container = styled.td<ContainerProps>`
   height: 48px;
+  min-width: 130px;
   padding: ${(props) => (props.isEditable ? 0 : "16px 8px")};
   font-weight: 400;
   background-color: ${(props) => props.theme.color.gray};
