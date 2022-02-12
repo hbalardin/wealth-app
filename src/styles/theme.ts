@@ -7,8 +7,10 @@ export const theme = {
     lightGray: "#1F1F1F",
     orange: "#FF4900",
     purple: "#BA00FF",
+    red: "#9E0100",
     yellow: "#FFB700",
     white: "#fbfbfb",
+    whiteTransparent: "rgba(244,244,244, 0.1)",
   },
   gradient: {
     orangeYellow:

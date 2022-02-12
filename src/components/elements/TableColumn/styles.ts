@@ -7,14 +7,10 @@ interface ContainerProps {
 export const Container = styled.th<ContainerProps>`
   height: 48px;
   min-width: 130px;
-  padding: ${(props) => (props.isEditable ? 0 : "16px 8px")};
-  font-weight: 400;
+  padding-top: 8px;
   border-bottom: 1px solid transparent;
-  font-size: ${(props) => props.theme.text.default};
-  color: ${(props) => props.theme.color.orange};
-  text-align: left;
 
-  &:last-child {
+  &:last-child input {
     font-weight: 500;
     text-align: right;
   }
@@ -35,6 +31,9 @@ export const Container = styled.th<ContainerProps>`
     &:focus {
       border-bottom: 1px solid ${(props) => props.theme.color.orange};
       outline: none;
+    }
+    &:focus:not(:hover) {
+      background: ${(props) => props.theme.color.whiteTransparent};
     }
   }
 `;

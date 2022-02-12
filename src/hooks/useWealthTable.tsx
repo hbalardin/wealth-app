@@ -53,8 +53,9 @@ export type Row = {
 export interface TableData {
   columns: Column[];
   rows: Row[];
-  updateData: (data: typeof INITIAL_DATA) => void;
   createColumn: () => void;
+  deleteColumn: (columnKey: string) => void;
+  updateData: (data: typeof INITIAL_DATA) => void;
 }
 
 export const useWealthTable = (): TableData => {
@@ -72,6 +73,21 @@ export const useWealthTable = (): TableData => {
       value: 0,
     };
   }, []);
+
+  const deleteColumn = useCallback(
+    (columnKey: string): void => {
+      const updatedColumns = data.columns.filter(
+        ({ key }) => columnKey !== key
+      );
+      const updatedRows = data.rows.map((row) => ({
+        ...row,
+        cells: row.cells.filter((cell) => columnKey !== cell.columnKey),
+      }));
+
+      setData({ columns: updatedColumns, rows: updatedRows });
+    },
+    [data, setData]
+  );
 
   const getColumnRows = useCallback(
     (columnKey: string) => {
@@ -118,7 +134,8 @@ export const useWealthTable = (): TableData => {
   return {
     columns: data.columns,
     rows: getCalcRows(data.rows),
-    updateData: setData,
     createColumn,
+    deleteColumn,
+    updateData: setData,
   };
 };
