@@ -7,7 +7,6 @@ interface ContainerProps {
 
 export const Container = styled.div<ContainerProps>`
   position: relative;
-  display: inline-block;
   background: ${(props) =>
     props.isVisible ? props.theme.color.whiteTransparent : ""};
   transition: background-color 200ms ease;
