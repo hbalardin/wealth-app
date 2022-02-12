@@ -5,7 +5,7 @@ import { TableColumn } from "../../elements/TableColumn";
 import { TableCell } from "../../elements/TableCell";
 import { Cell, Column, TableData } from "../../../hooks/useWealthTable";
 
-const Table = ({ columns, rows, updateData }: TableData) => {
+const Table = ({ columns, rows, updateData, deleteColumn }: TableData) => {
   const onChangeColumn = useCallback(
     (newColumn: Column) => {
       const updatedColumns = columns.map((column) => {
@@ -40,9 +40,10 @@ const Table = ({ columns, rows, updateData }: TableData) => {
         key={column.key}
         column={column}
         onChangeColumn={onChangeColumn}
+        onClickCloseButton={deleteColumn}
       />
     ));
-  }, [columns, onChangeColumn]);
+  }, [columns, onChangeColumn, deleteColumn]);
 
   const tbodyContent = useMemo(() => {
     return rows.map((row) => (
@@ -65,8 +66,12 @@ const Table = ({ columns, rows, updateData }: TableData) => {
 
   return (
     <Container>
-      <thead>{theadContent}</thead>
-      <tbody>{tbodyContent}</tbody>
+      <table>
+        <thead>
+          <tr>{theadContent}</tr>
+        </thead>
+        <tbody>{tbodyContent}</tbody>
+      </table>
     </Container>
   );
 };
