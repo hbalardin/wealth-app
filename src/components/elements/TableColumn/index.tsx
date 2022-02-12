@@ -5,15 +5,20 @@ import { Container } from "./styles";
 interface TableColumnProps {
   column: Column;
   onChangeColumn: (newColumn: Column) => void;
+  onClickCloseButton: (columnKey: string) => void;
 }
 
-export const TableColumn = ({ column, onChangeColumn }: TableColumnProps) => {
+export const TableColumn = ({
+  column,
+  onChangeColumn,
+  onClickCloseButton,
+}: TableColumnProps) => {
   const { isEditable, text } = column;
 
   return (
     <Container isEditable={isEditable}>
       {isEditable ? (
-        <HoverCloseButton onClick={() => null}>
+        <HoverCloseButton onClick={() => onClickCloseButton(column.key)}>
           <input
             type="text"
             placeholder="Banco Y"
