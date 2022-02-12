@@ -32,5 +32,8 @@ export const Container = styled.th<ContainerProps>`
       border-bottom: 1px solid ${(props) => props.theme.color.orange};
       outline: none;
     }
+    &:focus:not(:hover) {
+      background: ${(props) => props.theme.color.whiteTransparent};
+    }
   }
 `;
