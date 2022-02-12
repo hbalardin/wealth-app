@@ -16,6 +16,7 @@ export const TableColumn = ({ column, onChangeColumn }: TableColumnProps) => {
           type="text"
           placeholder="Banco Y"
           value={text}
+          onKeyDown={(e) => e.key === "Enter" && e.currentTarget.blur()}
           onChange={(e) => onChangeColumn({ ...column, text: e.target.value })}
         />
       ) : (

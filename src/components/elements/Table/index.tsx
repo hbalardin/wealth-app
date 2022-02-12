@@ -65,8 +65,12 @@ const Table = ({ columns, rows, updateData }: TableData) => {
 
   return (
     <Container>
-      <thead>{theadContent}</thead>
-      <tbody>{tbodyContent}</tbody>
+      <table>
+        <thead>
+          <tr>{theadContent}</tr>
+        </thead>
+        <tbody>{tbodyContent}</tbody>
+      </table>
     </Container>
   );
 };
