@@ -10,7 +10,7 @@ interface HoverCloseButtonProps {
   size?: number;
 }
 
-const HoverCloseButton = ({
+export const HoverCloseButton = ({
   children,
   onClick,
   size = 8,
@@ -31,5 +31,3 @@ const HoverCloseButton = ({
     </Container>
   );
 };
-
-export default HoverCloseButton;
