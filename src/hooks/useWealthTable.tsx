@@ -1,11 +1,11 @@
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import { MONTHS } from "../utils/constants";
 import { convertToCurrency } from "../utils/functions";
 import { useLocalStorage } from "./useLocalStorage";
 
 const INITIAL_DATA = {
   columns: [
-    { key: "MonthKey", text: "Mês", isEditable: false },
+    { key: "MonthsKey", text: "Mês", isEditable: false },
     { key: "99", text: "Banco", isEditable: true },
     { key: "TotalKey", text: "Total", isEditable: false },
   ],
@@ -13,7 +13,7 @@ const INITIAL_DATA = {
     id,
     cells: [
       {
-        columnKey: "MonthKey",
+        columnKey: "MonthsKey",
         isEditable: false,
         rowId: id,
         text: MONTHS[id].value,
@@ -63,6 +63,25 @@ export const useWealthTable = (): TableData => {
     "@HB:PrimoAPP-WealthTable",
     INITIAL_DATA
   );
+
+  useEffect(() => {
+    if (!data) return;
+    const oldMonthColumnIndex = data.columns.findIndex(
+      ({ key }) => key === "MonthKey"
+    );
+    if (oldMonthColumnIndex < 0) return;
+
+    const updatedColumns = [...data.columns];
+    updatedColumns[oldMonthColumnIndex] = INITIAL_DATA.columns[0];
+
+    const updatedRows = data.rows.map((row, index) => {
+      const updatedCells = [...row.cells];
+      updatedCells[0] = INITIAL_DATA.rows[index].cells[0];
+      return { ...row, cells: updatedCells };
+    });
+
+    setData({ columns: updatedColumns, rows: updatedRows });
+  }, []);
 
   const createCell = useCallback((rowId: number, columnKey: string): Cell => {
     return {
