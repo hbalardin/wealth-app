@@ -2,12 +2,13 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   height: 100vh;
-  padding: 32px 24px;
+  padding: 32px 24px 32px 64px;
+  position: relative;
 
   > main {
     height: 100%;
     width: 100%;
-    max-width: 980px;
+    max-width: 1080px;
     margin: 0 auto;
   }
 `;

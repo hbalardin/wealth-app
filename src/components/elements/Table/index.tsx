@@ -5,7 +5,12 @@ import { TableColumn } from "../../elements/TableColumn";
 import { TableCell } from "../../elements/TableCell";
 import { Cell, Column, TableData } from "../../../hooks/useWealthTable";
 
-const Table = ({ columns, rows, updateData, deleteColumn }: TableData) => {
+export const Table = ({
+  columns,
+  rows,
+  updateData,
+  deleteColumn,
+}: TableData) => {
   const onChangeColumn = useCallback(
     (newColumn: Column) => {
       const updatedColumns = columns.map((column) => {
@@ -75,5 +80,3 @@ const Table = ({ columns, rows, updateData, deleteColumn }: TableData) => {
     </Container>
   );
 };
-
-export default Table;
