@@ -32,11 +32,14 @@ export const WealthDoughnutChart = () => {
   };
 
   const currentMonth = new Date().getMonth();
+  const monthData = formatArray(rows[currentMonth].cells).map(
+    (cell) => cell.value
+  );
   const data = {
     labels: formatArray(columns).map((column) => column.text),
     dataset: {
       colors: formatArray(columns).map((_, i) => colors[i]),
-      data: formatArray(rows[currentMonth].cells).map((cell) => cell.value),
+      data: monthData,
     },
   };
 
@@ -45,8 +48,11 @@ export const WealthDoughnutChart = () => {
       <h2>
         Alocação de riqueza no mês {MONTHS[currentMonth].long.toLowerCase()}
       </h2>
-
-      <DoughnutChart {...data} customStyle={{ maxHeight: 300 }} />
+      {monthData.some((n) => !!n) ? (
+        <DoughnutChart {...data} customStyle={{ maxHeight: 300 }} />
+      ) : (
+        <p>Ainda não há dados cadastrados nesse mês.</p>
+      )}
     </Container>
   );
 };
