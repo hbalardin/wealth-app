@@ -7,13 +7,13 @@ export const Routes = () => {
   const paths = [
     {
       element: () => <></>,
-      icon: <FaChartLine size={24} />,
+      icon: <FaChartLine size={20} />,
       path: "/",
       text: "Progresso",
     },
     {
       element: Home,
-      icon: <FaDollarSign size={24} />,
+      icon: <FaDollarSign size={20} />,
       path: "/patrimonio",
       text: "Patrimonio",
     },

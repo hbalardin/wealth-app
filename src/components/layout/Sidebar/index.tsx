@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { BackgroundContainer, Container, NavItem } from "./styles";
 
 interface SidebarProps {
@@ -13,7 +13,6 @@ interface SidebarProps {
 export const Sidebar = ({ items }: SidebarProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
-  const navigate = useNavigate();
 
   return (
     <Container
@@ -27,13 +26,12 @@ export const Sidebar = ({ items }: SidebarProps) => {
             <NavItem
               key={path}
               isSelected={location.pathname === path}
-              onClick={() => navigate(path)}
               show={isOpen}
             >
-              <div onClick={() => navigate(path)}>
+              <Link to={path}>
                 {icon}
                 <span>{text}</span>
-              </div>
+              </Link>
             </NavItem>
           ))}
         </ul>

@@ -29,7 +29,11 @@ export const BackgroundContainer = styled.div<BackgroundContainerProps>`
   transition: all 600ms ease;
   position: fixed;
   top: 0;
-  left: ${(props) => (props.show ? 0 : "-100%")};
+
+  left: -100%;
+  @media (min-width: 420px) {
+    left: ${(props) => (props.show ? 0 : "-100%")};
+  }
 `;
 
 interface NavItemProps {
@@ -41,11 +45,11 @@ export const NavItem = styled.li<NavItemProps>`
   width: 100%;
   display: flex;
 
-  padding: 16px;
+  padding: 12px 16px;
   transition: all 300ms ease;
   cursor: pointer;
 
-  > div {
+  > a {
     display: flex;
     align-items: center;
 
@@ -57,19 +61,23 @@ export const NavItem = styled.li<NavItemProps>`
       position: absolute;
       transform: translateX(16px);
       left: 100%;
-      opacity: ${(props) => Number(props.show)};
 
       color: ${(props) => props.theme.color.white};
       text-transform: uppercase;
       font-weight: 300;
       transition: all 400ms ease 50ms;
+
+      opacity: 0;
+      @media (min-width: 420px) {
+        opacity: ${(props) => Number(props.show)};
+      }
     }
   }
 
   ${({ isSelected }) =>
     isSelected
       ? css`
-          > div {
+          > a {
             color: ${({ theme }) => theme.color.orange};
             > span {
               font-weight: 500;
