@@ -6,7 +6,7 @@ import { Button } from "../../components/elements/Button";
 
 import { useWealthTable } from "../../hooks/useWealthTable";
 
-export const Home = () => {
+export const WealthPage = () => {
   const wealthTableProps = useWealthTable();
 
   return (

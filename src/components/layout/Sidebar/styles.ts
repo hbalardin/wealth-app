@@ -45,11 +45,12 @@ export const NavItem = styled.li<NavItemProps>`
   width: 100%;
   display: flex;
 
-  padding: 12px 16px;
   transition: all 300ms ease;
-  cursor: pointer;
 
   > a {
+    cursor: pointer;
+    padding: 12px 16px;
+
     display: flex;
     align-items: center;
 
