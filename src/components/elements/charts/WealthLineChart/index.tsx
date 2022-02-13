@@ -1,4 +1,6 @@
-import { useWealthTable } from "../../../../hooks/useWealthTable";
+import { useEffect, useState } from "react";
+import { Row, useWealthTable } from "../../../../hooks/useWealthTable";
+import { MONTHS } from "../../../../utils/constants";
 
 import { Container } from "./styles";
 
@@ -7,12 +9,22 @@ import { LineChart } from "../../../external/LineChart";
 
 export const WealthLineChart = () => {
   const { rows } = useWealthTable();
+  const [visibleRows, setVisibleRows] = useState<Row[]>([]);
+
+  const currentMonth = new Date().getMonth();
+  useEffect(() => {
+    const draft = [...rows];
+    draft.length = currentMonth + 1;
+
+    setVisibleRows(draft);
+  }, [rows]);
+
   const data = {
-    labels: rows.map((row) => row.cells[0].text),
+    labels: visibleRows.map((row) => row.cells[0].text),
     datasets: [
       {
         label: "Riqueza Acumulada",
-        data: rows.map((row) => row.cells[row.cells.length - 1].value),
+        data: visibleRows.map((row) => row.cells[row.cells.length - 1].value),
         color: theme.color.orange,
       },
     ],
@@ -20,7 +32,7 @@ export const WealthLineChart = () => {
 
   return (
     <Container>
-      <h2>Seu Progresso</h2>
+      <h2>Progresso até o mês de {MONTHS[currentMonth].long.toLowerCase()}</h2>
       <LineChart {...data} customStyle={{ maxHeight: 300 }} />
     </Container>
   );
