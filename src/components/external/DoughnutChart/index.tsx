@@ -1,28 +1,7 @@
-import {
-  Chart as ChartJS,
-  ArcElement,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-} from "chart.js";
-import { Chart as ChartJs } from "react-chartjs-2";
+import { Chart as ChartJs, registerables } from "chart.js";
+import { Chart } from "react-chartjs-2";
 import { CSSProperties } from "styled-components";
-
-ChartJS.register(
-  ArcElement,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend
-);
-
+ChartJs.register(...registerables);
 interface Dataset {
   colors: string[];
   data: number[];
@@ -45,5 +24,5 @@ export const DoughnutChart = ({ customStyle, dataset, labels }: ChartProps) => {
     ],
   };
 
-  return <ChartJs type="pie" data={data} style={customStyle} />;
+  return <Chart type="pie" data={data} style={customStyle} />;
 };
