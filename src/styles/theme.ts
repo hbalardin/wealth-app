@@ -23,6 +23,7 @@ export const theme = {
     full: "9999px",
   },
   text: {
+    small: "12px",
     default: "14px",
     medium: "18px",
     large: "28px",

@@ -45,5 +45,5 @@ export const DoughnutChart = ({ customStyle, dataset, labels }: ChartProps) => {
     ],
   };
 
-  return <ChartJs type="doughnut" data={data} style={customStyle} />;
+  return <ChartJs type="pie" data={data} style={customStyle} />;
 };

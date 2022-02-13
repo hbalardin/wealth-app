@@ -1,5 +1,6 @@
 import { FaChartLine, FaDollarSign } from "react-icons/fa";
 import { BrowserRouter, Routes as Router, Route } from "react-router-dom";
+import { Footer } from "../components/layout/Footer";
 import { Sidebar } from "../components/layout/Sidebar";
 import { HomePage } from "../pages/HomePage";
 import { WealthPage } from "../pages/WealthPage";
@@ -28,6 +29,7 @@ export const Routes = () => {
           <Route key={route.path} path={route.path} element={route.element()} />
         ))}
       </Router>
+      <Footer />
     </BrowserRouter>
   );
 };

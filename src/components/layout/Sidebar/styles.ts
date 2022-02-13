@@ -5,6 +5,7 @@ export const Container = styled.aside`
   display: flex;
   align-items: center;
   z-index: 50;
+  background: ${(props) => props.theme.color.lightGray};
 
   nav ul {
     list-style: none;
@@ -24,7 +25,7 @@ interface BackgroundContainerProps {
 export const BackgroundContainer = styled.div<BackgroundContainerProps>`
   width: 224px;
   height: 100vh;
-  background: ${(props) => props.theme.color.lightGray};
+  background: ${(props) => props.theme.color.black};
 
   transition: all 600ms ease;
   position: fixed;
