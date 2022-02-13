@@ -1,22 +1,19 @@
 import { useState } from "react";
-import { FaChartLine, FaDollarSign } from "react-icons/fa";
+import { useLocation, useNavigate } from "react-router-dom";
 import { BackgroundContainer, Container, NavItem } from "./styles";
 
-export const Sidebar = () => {
-  const [isOpen, setIsOpen] = useState(false);
+interface SidebarProps {
+  items: Array<{
+    icon: JSX.Element;
+    text: string;
+    path: string;
+  }>;
+}
 
-  const items = [
-    {
-      icon: <FaChartLine size={24} />,
-      text: "Progresso",
-      path: "/progresso",
-    },
-    {
-      icon: <FaDollarSign size={24} />,
-      text: "Patrimonio",
-      path: "/patrimonio",
-    },
-  ];
+export const Sidebar = ({ items }: SidebarProps) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   return (
     <Container
@@ -26,9 +23,14 @@ export const Sidebar = () => {
       <BackgroundContainer show={isOpen} />
       <nav>
         <ul>
-          {items.map(({ icon, path, text }, i) => (
-            <NavItem key={path} isSelected={i === 0} show={isOpen}>
-              <div>
+          {items.map(({ icon, path, text }) => (
+            <NavItem
+              key={path}
+              isSelected={location.pathname === path}
+              onClick={() => navigate(path)}
+              show={isOpen}
+            >
+              <div onClick={() => navigate(path)}>
                 {icon}
                 <span>{text}</span>
               </div>
