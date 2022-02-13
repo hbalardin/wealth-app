@@ -16,7 +16,7 @@ const INITIAL_DATA = {
         columnKey: "MonthsKey",
         isEditable: false,
         rowId: id,
-        text: MONTHS[id].value,
+        text: MONTHS[id].short,
         value: 0,
       },
       { rowId: id, columnKey: "99", text: "", value: 0, isEditable: true },
