@@ -1,25 +1,7 @@
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-} from "chart.js";
-import { Chart as ChartJs } from "react-chartjs-2";
+import { Chart as ChartJs, registerables } from "chart.js";
+import { Chart } from "react-chartjs-2";
 import { CSSProperties } from "styled-components";
-
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend
-);
+ChartJs.register(...registerables);
 
 interface Dataset {
   label: string;
@@ -46,5 +28,5 @@ export const LineChart = ({ customStyle, datasets, labels }: ChartProps) => {
     })),
   };
 
-  return <ChartJs type="line" data={data} style={customStyle} />;
+  return <Chart type="line" data={data} style={customStyle} />;
 };
