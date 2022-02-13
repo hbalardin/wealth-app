@@ -1,18 +1,19 @@
 import { FaChartLine, FaDollarSign } from "react-icons/fa";
 import { BrowserRouter, Routes as Router, Route } from "react-router-dom";
 import { Sidebar } from "../components/layout/Sidebar";
-import { Home } from "../pages/Home";
+import { HomePage } from "../pages/HomePage";
+import { WealthPage } from "../pages/WealthPage";
 
 export const Routes = () => {
   const paths = [
     {
-      element: () => <></>,
+      element: HomePage,
       icon: <FaChartLine size={20} />,
       path: "/",
       text: "Progresso",
     },
     {
-      element: Home,
+      element: WealthPage,
       icon: <FaDollarSign size={20} />,
       path: "/patrimonio",
       text: "Patrimonio",
