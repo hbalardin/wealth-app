@@ -7,4 +7,7 @@ export const Container = styled.div`
     font-size: ${(props) => props.theme.text.medium};
     margin-bottom: 8px;
   }
+  p {
+    font-size: ${(props) => props.theme.text.small};
+  }
 `;
