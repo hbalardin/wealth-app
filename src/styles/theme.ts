@@ -1,6 +1,7 @@
 export const theme = {
   color: {
     black: "#040404",
+    blue: "#10BAFB",
     darkGray: "#0B0B0B",
     gray: "#141414",
     green: "#23A992",
@@ -22,6 +23,7 @@ export const theme = {
     full: "9999px",
   },
   text: {
+    small: "12px",
     default: "14px",
     medium: "18px",
     large: "28px",

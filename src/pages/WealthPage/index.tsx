@@ -1,12 +1,12 @@
 import { PageHeader } from "./styles";
 
-import Table from "../../components/elements/Table";
-import PageLayout from "../../components/layout/PageLayout";
-import Button from "../../components/elements/Button";
+import { Table } from "../../components/elements/Table";
+import { PageLayout } from "../../components/layout/PageLayout";
+import { Button } from "../../components/elements/Button";
 
 import { useWealthTable } from "../../hooks/useWealthTable";
 
-const Home = () => {
+export const WealthPage = () => {
   const wealthTableProps = useWealthTable();
 
   return (
@@ -21,5 +21,3 @@ const Home = () => {
     </PageLayout>
   );
 };
-
-export default Home;

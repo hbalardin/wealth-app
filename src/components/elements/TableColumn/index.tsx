@@ -1,5 +1,5 @@
 import { Column } from "../../../hooks/useWealthTable";
-import HoverCloseButton from "../../widgets/HoverCloseButton";
+import { HoverCloseButton } from "../../widgets/HoverCloseButton";
 import { Container } from "./styles";
 
 interface TableColumnProps {
